@@ -1,0 +1,18 @@
+type AIprompt @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  promptObj: String
+  image: AWSURL
+  Styles: [Style] @hasMany(indexName: "byAIprompt", fields: ["id"])
+  Size: Size @hasOne
+}
+
+type Size @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  untitledfield: String
+}
+
+type Style @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Sizes: ID! @index(name: "byAIprompt")
+}
+ 
